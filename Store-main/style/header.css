@@ -1,0 +1,254 @@
+header{
+    width: 100%;
+}
+.header-menu{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 1200px;
+    margin: 0 auto;
+    height: 7vh;
+    padding: 0;
+    color: black;
+    font-family: Kerola;
+    align-items: center;
+}
+
+.navigation-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50%;
+    width: 60%;
+}
+.navigation-items > li {
+    padding: 0 2rem;
+}
+.catalog:after, .contacts:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    bottom: 0;
+}
+.catalog:hover, .contacts:hover{
+    transform: scale(1.1);
+}
+.catalog:hover:after, .contacts:hover:after{
+    border-bottom: 2px solid black;
+    animation: loading .5s ease-in-out forwards;
+}
+
+@keyframes loading {
+    to {
+        width: 100%;
+    }
+}
+
+
+.navigation-items > li:nth-child(2) > input{
+    width: 350px;
+}
+.catalog, .contacts {
+    position: relative;
+    font-family: "Kerola Bold";
+}
+.navigation-items > li:hover {
+    font-family: "Kerola Bold";
+}
+a{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+header nav ul li a {
+    padding: 0 2rem;
+}
+.logo {
+    font-family: "ALS CSKA Regular";
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 1rem;
+}
+
+.logo img {
+    display: block;
+}
+.navigation-burger{
+    display: none;
+}
+.btn_cart{
+    width: 100px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: box-shadow .5s;
+    position: relative;
+}
+.btn_cart:hover{
+    box-shadow: 2px 8px 20px 0 rgba(102, 102, 102, 0.57);;
+}
+
+.cart_count{
+    border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    padding: 2px;
+    background: #73da3d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+.cart_count.visible{
+    display: block;
+}
+
+
+.breadcrumbs{
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.breadcrumbs li{
+    float: left;
+    margin: 0 .5em 0 1em;
+    background: #ddd;
+    padding: .4em 1em;
+    text-decoration: none;
+    color: #444;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    position: relative;
+    font-family: Kerola;
+    /*font-size: 0.8rem;*/
+    align-items: center;
+}
+
+.breadcrumbs li:hover{
+    background: #99db76;
+    cursor: pointer;
+}
+
+.breadcrumbs li:nth-last-child(1){
+    pointer-events: none;
+}
+.breadcrumbs li::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -1.6em;
+    border-width: 1.7em 0 1.5em 1em;
+    border-style: solid;
+    border-color: #ddd #ddd #ddd transparent;
+    left: -1em;
+}
+
+.breadcrumbs li:hover::before{
+    border-color: #99db76 #99db76 #99db76 transparent;
+}
+
+.breadcrumbs li::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -1.6em;
+    border-top: 1.7em solid transparent;
+    border-bottom: 1.5em solid transparent;
+    border-left: 1em solid #ddd;
+    right: -1em;
+}
+
+.breadcrumbs li:hover::after{
+    border-left-color: #99db76;
+}
+.breadcrumb-home > span{
+    margin: 0 .5rem;
+    font-family: "Kerola Bold";
+}
+
+.breadcrumb-home{
+    display: none;
+    flex-direction: row;
+    align-items: center;
+}
+.breadcrumb-home.visible{
+    display: flex;
+}
+@media (max-width: 1200px){
+    .header-menu{
+        width: 100%;
+    }
+    .navigation-items > li{
+        padding: 0 1rem;
+    }
+    .breadcrumbs{
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 992px) {
+    .navigation-burger {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        margin-left: 1rem;
+        justify-content: center;
+    }
+    .navigation-burger-bar {
+        width: 3rem;
+        height: 0.3rem;
+        background: black;
+        margin: 0.2rem 0;
+    }
+    .navigation-items{
+        /*display: none;*/
+    }
+    .catalog{
+        display: none;
+    }
+    .navigation-items > li{
+        padding: 0;
+    }
+    .navigation-items > li:nth-child(2) > input{
+
+    }
+}
+
+
+@media (max-width: 768px){
+    .header-menu .logo {
+        font-size: 1rem;
+    }
+    .header-menu .logo img{
+        width: 50%;
+    }
+    .navigation-items{
+        width: 40%;
+    }
+    .navigation-items > li:nth-child(2) > input {
+        width: 100%;
+    }
+}
+@media (max-width: 500px){
+    .logo{
+        display: none;
+    }
+    .contacts{
+        display: none;
+    }
+    .breadcrumbs li{
+        font-size: .7rem;
+    }
+    .breadcrumb-home{
+        padding: .4rem .5rem;
+    }
+
+}

@@ -1,0 +1,95 @@
+.catalog-menu {
+     width: 621px;
+     height: 450px;
+     position: absolute;
+     top: 7%;
+     left: 50%;
+     transform: translate(-50%, 0);
+     background: white;
+     box-shadow: 0 0 10px 0 rgba(41,41,41,.1);
+     z-index: -10;
+     opacity: 0;
+    display: flex;
+ }
+.catalog-menu.active{
+    opacity: 1;
+    transition: opacity .3s;
+    z-index: 101;
+}
+.catalog-items{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.catalog-item{
+    display: flex;
+    flex-direction: column;
+    padding: .5rem 1rem;
+    box-shadow: 0 0 10px 0 rgba(41,41,41,.1);
+    width: 50%;
+    font-family: "Kerola Bold";
+    transition: box-shadow .5s;
+}
+.catalog-item:hover{
+    box-shadow: 2px 8px 20px 0 rgba(102, 102, 102, 0.57);
+    cursor: pointer;
+}
+.catalog-item > li{
+    padding: .5rem 1rem;
+    box-shadow: 0 0 10px 0 rgba(41,41,41,.1);
+    font-family: Kerola;
+    transition: box-shadow .5s;
+}
+.catalog-item > li:hover{
+    cursor: pointer;
+    box-shadow: 2px 8px 20px 0 rgba(102, 102, 102, 0.57);
+}
+.category-menu {
+    position: relative;
+    /*width: 20%;*/
+    width: 200px;
+    height: 400px;
+    box-shadow: 0 0 10px 0 rgba(41,41,41,.1);
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: box-shadow .5s;
+
+}
+.category-menu  > .card_title {
+    padding: 1rem;
+    display: block;
+    height: 20px;
+    font-family: Kerola;
+    transition: box-shadow .5s;
+}
+.category-menu:hover {
+    cursor: pointer;
+    box-shadow: 2px 8px 20px 0 rgba(102, 102, 102, 0.57);
+}
+.category-menu.hidden{
+    display: none;
+}
+@media (max-width: 1200px){
+    .category-menu{
+        height: 350px;
+    }
+}
+@media (max-width: 768px){
+    .catalog-menu{
+        width: 99%;
+    }
+}
+@media (max-width: 500px){
+    .catalog-item > li{
+        font-size: .7rem;
+    }
+    .catalog-item{
+        font-size: .8rem;
+    }
+
+}
+

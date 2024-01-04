@@ -1,0 +1,157 @@
+#filter{
+    width: 320px;
+    padding: 1rem;
+    display: none;
+    height: max-content;
+    position: absolute;
+}
+#filter.visible{
+    display: block;
+}
+
+
+/*Styles for accordion*/
+.accordion-item-header {
+    padding: 10px 15px;
+    /*background: #ed5565;*/
+    /*color: #fff;*/
+    cursor: pointer;
+    font-family: "Kerola Bold";
+    box-shadow: 0 0 10px 0 rgba(41,41,41,.1);
+    transition: box-shadow .5s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.accordion-item-header:hover{
+    box-shadow: 2px 8px 20px 0 rgba(102, 102, 102, 0.57);
+    cursor: pointer;
+}
+.accordion-item-content {
+    display: none;
+}
+.accordion-item.show .accordion-item-content {
+    padding: 10px 15px;
+    display: block;
+}
+
+.arrow{
+    color: #918c8c;
+    transition: transform .5s;
+}
+.arrow.rotate{
+    transform: rotate(180deg);
+}
+
+
+/*Styles for range*/
+input[type=range]  {
+    width: 100%;
+    margin-top: 2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    height: 2px;
+    background-color: rgba(48, 58, 67, 0.75);
+    cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+    background: rgba(29, 29, 58, 0.91);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 1.4rem;
+    height:  1.4rem;
+    -webkit-appearance: none;
+    margin-top: -11px;
+}
+
+input[type=range]::-moz-range-track {
+    height: 2px;
+    background-color: #303a43;
+    cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+    background: rgba(29, 29, 58, 0.91);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 1.4rem;
+    height:  1.4rem;
+    -webkit-appearance: none;
+    margin-top: -11px;
+}
+input[type=range]+p{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Kerola';
+    font-size: 0.7rem;
+}
+
+
+.accordion-item:nth-child(2) .accordion-item-content .range > span:nth-child(odd){
+    font-family: "Kerola Bold";
+    font-size: .8rem;
+}
+.accordion-item:nth-child(2) .accordion-item-content .range > span:nth-child(2),
+.accordion-item:nth-child(2) .accordion-item-content .range > output{
+    font-family: "Kerola Light";
+    font-size: 1.1rem;
+}
+
+.accordion-item:nth-child(2) .accordion-item-content .range > span{
+    margin-right: .5rem;
+}
+.range{
+    position: relative;
+}
+.rangeOk{
+    border-radius: 3px;
+    border: 1px solid #00000030;
+    padding: .3rem 1rem;
+    position: absolute;
+    right: 0;
+}
+.rangeOk:hover{
+    background: #00000030;
+}
+
+input[type=checkbox] + label, input[type=radio] + label{
+    font-size: 0.8rem;
+}
+#btnFilter{
+    display: none;
+}
+@media (max-width: 1200px){
+    #filter{
+        width: 278px;
+    }
+
+}
+@media (max-width: 992px) {
+    #btnFilter.visible{
+        display: block;
+        border-radius: 3px;
+        border: 1px solid #00000030;
+        padding: .3rem 1rem;
+        margin: 1rem 0 0 1rem;
+    }
+    #btnFilter:hover{
+        background: #00000030;
+    }
+    #filter.visible{
+        z-index: 5;
+        background: aliceblue;
+        margin-top: 20px;
+    }
+}
+@media (max-width: 500px){
+    #filter{
+        width: 100%;
+    }
+
+}
+
+
+
