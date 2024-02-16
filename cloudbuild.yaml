@@ -11,7 +11,7 @@ steps:
 
   -id: 'tf init'
     name: 'hashicrop/terraform:5.10.0'
-    entrypoint:'sh'
+    entrypoint: 'sh'
     args:
     - '-c'
     - | 
@@ -19,7 +19,7 @@ steps:
 
   -id: 'tf plan'
     name: 'hashicrop/terraform:5.10.0'
-    entrypoint:'sh'
+    entrypoint: 'sh'
     args:
     - '-c'
     - | 
@@ -27,7 +27,7 @@ steps:
 
   -id: 'tf apply'
     name: 'hashicrop/terraform:5.10.0'
-    entrypoint:'sh'
+    entrypoint: 'sh'
     args:
     - '-c'
     - | 
