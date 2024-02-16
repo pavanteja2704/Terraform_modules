@@ -1,4 +1,4 @@
-resource "google_compute_instance" "vm-for-terraform-1" {
+resource "google_compute_instance" "vm-tf" {
   name         = "vm-pavan"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
