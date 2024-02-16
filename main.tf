@@ -1,5 +1,5 @@
 resource "google_compute_instance" "vm-tf" {
-  name         = "vm-pavan"
+  name         = "pavan-cicd"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
 

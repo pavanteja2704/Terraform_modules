@@ -10,7 +10,7 @@ steps:
         echo "************"
 
   - id: 'tf init'
-    name: 'hashicrop/terraform:5.10.0'
+    name: 'hashicrop/terraform:1.0.0'
     entrypoint: 'sh'
     args:
     - '-c'
@@ -18,7 +18,7 @@ steps:
        terraform inti
 
   - id: 'tf plan'
-    name: 'hashicrop/terraform:5.10.0'
+    name: 'hashicrop/terraform:1.0.0'
     entrypoint: 'sh'
     args:
     - '-c'
@@ -26,17 +26,17 @@ steps:
        terraform plan
 
   - id: 'tf apply'
-    name: 'hashicrop/terraform:5.10.0'
+    name: 'hashicrop/terraform:1.0.0'
     entrypoint: 'sh'
     args:
     - '-c'
     - | 
-        if [["$BRANCH_NAME"=="prod"]];then
-           echo "Branch is 'prod',proceeding with terraform apply."
-           terraform apply --auto approve
+        if [["$BRANCH_NAME"=="main"]];then
+           echo "Branch is 'main',proceeding with terraform apply."
+           terraform apply --auto-approve
            exit 0
         else
-           echo "Branch is not 'prod', skipping terraform apply."
+           echo "Branch is not 'main', skipping terraform apply."
            exit 0
         fi    
 
