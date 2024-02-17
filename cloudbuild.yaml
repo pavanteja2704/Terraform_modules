@@ -15,7 +15,7 @@ steps:
      args:
      - '-c'
      - | 
-       terraform inti
+       terraform init
 
    - id: 'tf plan'
      name: 'hashicorp/terraform:latest'
