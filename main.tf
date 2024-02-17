@@ -6,22 +6,19 @@ resource "google_compute_instance" "default" {
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
     }
   }
-network_interface {
+  
+  metadata_startup_script = <<-EOF
+    #!/bin/bash
+    apt-get update
+    apt-get install -y apache2
+    EOF
+  
+  network_interface {
     network = "default"
-
-    access_config {
-       // Ephemeral public IP
-    }
+    access_config {}
   }
- metadata = {
-    foo = "bar"
-  }
-  metadata_startup_script = "echo hi > /test.txt"
 }
 
 
