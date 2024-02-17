@@ -31,12 +31,12 @@ steps:
      args:
      - '-c'
      - | 
-         if [["$BRANCH_NAME"=="main"]];then
-           echo "Branch is 'main',proceeding with terraform apply."
+         if [["$BRANCH_NAME"=="prod"]];then
+           echo "Branch is 'prod',proceeding with terraform apply."
            terraform apply --auto-approve
            exit 0
          else
-           echo "Branch is not 'main', skipping terraform apply."
+           echo "Branch is not 'prod', skipping terraform apply."
            exit 0
          fi    
 
