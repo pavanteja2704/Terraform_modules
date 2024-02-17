@@ -11,11 +11,19 @@ resource "google_compute_instance" "default" {
       }
     }
   }
-
-  network_interface {
+network_interface {
     network = "default"
+
+    access_config {
+        Ephemeral public IP
+    }
   }
+ metadata = {
+    foo = "bar"
+  }
+  metadata_startup_script = "echo hi > /test.txt"
 }
+
 
 
 
