@@ -1,5 +1,5 @@
 resource "google_compute_instance" "default" {
-  name         = "my-CICD"
+  name         = "my-cicd"
   machine_type = "n2-standard-2"
   zone         = "us-central1-a"
 
