@@ -9,17 +9,17 @@ resource "google_compute_instance" "default" {
     }
   }
   
-  metadata_startup_script = <<-EOF
-    sudo apt-get update
-    sudo apt-get install -y apache2
-    EOF
-  
   network_interface {
     network = "default"
     access_config {}
   }
+
+  metadata={
+    startup-script = <<-EOF
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    EOF
+  }
 }
-
-
 
 
