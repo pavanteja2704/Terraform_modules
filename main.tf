@@ -11,7 +11,8 @@ resource "google_compute_instance" "default" {
     startup-script = <<-EOF
     #!/bin/bash
     apt-get update
-    apt-get install -y apache2 
+    apt-get install nginx -y
+    apt-get install apache2 -y
     EOF
   }
  network_interface {
@@ -25,5 +26,6 @@ resource "google_compute_firewall" "allow-http" {
     protocol = "tcp"
     ports = ["80"] 
     }
-    source_ranges = ["0.0.0.0/0"] }
+    source_ranges = ["0.0.0.0/0"] 
+  }
 }
