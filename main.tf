@@ -22,7 +22,7 @@ resource "google_compute_instance" "default" {
 }
  
 resource "google_compute_network" "default" {
-  name                    = "my-vpc-network"
+  name = "my-vpc-network"
   auto_create_subnetworks = false
 }
  
