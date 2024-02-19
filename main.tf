@@ -1,5 +1,5 @@
 resource "google_compute_instance" "default" {
-  name         = "my-cicd-1"
+  name         = "my-cicd"
   machine_type = "e2-medium"
   zone         = "asia-south1-b"
   boot_disk {
@@ -10,9 +10,8 @@ resource "google_compute_instance" "default" {
   metadata = {
     startup-script = <<-EOF
     #!/bin/bash
-    apt-get update
-    apt-get install nginx -y
-    apt-get install apache2 -y
+    sudo apt-get update
+    sudo apt-get install -y python3
     EOF
   }
  network_interface {
