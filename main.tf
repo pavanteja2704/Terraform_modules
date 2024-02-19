@@ -10,13 +10,20 @@ resource "google_compute_instance" "default" {
   metadata = {
     startup-script = <<-EOF
     #!/bin/bash
-    # Install required packages
-    sudo apt-get update
-    sudo apt-get install -y apache2
+    apt-get update
+    apt-get install -y apache2 
     EOF
   }
  network_interface {
   network = "default"
   access_config {}
 }
+resource "google_compute_firewall" "allow-http" {
+   name = "allow-http"
+   network = "default"
+   allow {
+    protocol = "tcp"
+    ports = ["80"] 
+    }
+    source_ranges = ["0.0.0.0/0"] }
 }
