@@ -1,6 +1,6 @@
 resource "google_compute_instance" "default" {
   name         = "my-cicd"
-  machine_type = "n2-standard-2"
+  machine_type = "e2-medium"
   zone         = "us-central1-a"
 
   boot_disk {
@@ -17,8 +17,8 @@ resource "google_compute_instance" "default" {
   metadata = {
     startup-script = <<-EOF
     #!/bin/bash
-    sudo apt-get update
-    sudo apt-get install apache2 -y
+    apt-get update
+    apt-get install apache2 -y
     EOF
   }
 }
