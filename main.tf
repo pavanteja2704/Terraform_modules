@@ -1,18 +1,18 @@
 resource "google_compute_instance" "default" {
-  name         = "terraform-instance2"
+  name         = "my-cicd"
   machine_type = "e2-medium"
   zone         = "asia-south1-b"
   boot_disk {
     initialize_params {
-      image = "centos-cloud/centos-7"
+      image = "debian-cloud/debian-12"
     }
   }
   metadata = {
     startup-script = <<-EOF
     #!/bin/bash
- 
     # Install required packages
-    sudo yum install tomcat git wget mysql -y
+    apt-get update
+    apt-get install -y apache2
     EOF
   }
  network_interface {
