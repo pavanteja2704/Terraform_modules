@@ -15,9 +15,8 @@ resource "google_compute_instance" "default" {
     sudo yum install tomcat git wget mysql -y
     EOF
   }
-}
- 
-resource "google_compute_network" "default" {
+ network_interface {
   network = "default"
   access_config {}
+}
 }
