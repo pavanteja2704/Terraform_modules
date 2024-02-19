@@ -16,6 +16,7 @@ resource "google_compute_instance" "default" {
 
   metadata={
     startup-script = <<-EOF
+    #!/bin/bash
     sudo apt-get update
     sudo apt-get install -y apache2
     EOF
