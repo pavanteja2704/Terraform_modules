@@ -239,103 +239,180 @@ resource "google_data_loss_prevention_job_trigger" "basic" {
             }
           }
         }
-        dynamic "storage_config"{
-         timespan_config={
-         start_time
-         end_time
-         enable_auto_population_of_timespan_config
-         timestamp_field={
-           name
-         }
-         }
-         datastore_options={
-          partition_id={
-          project_id=
-          namespace_id=
+        storage_config {
+         for_each = var.storage_config
+         content {
+           dynamic "timespan_config"{
+           for_each = lookup(storage_config.value,"timespan_config",[])
+           content {
+             start_time = lookup(timespan_config.value,"start_time",null)
+             end_time   = lookup(timespan_config.value,"end_time",null)
+             enable_auto_population_of_timespan_config = lookup(timespan_config.value,"enable_auto_population_of_timespan_config",null)
+             dynamic "timestamp_field"{
+               content {
+                  for_each = lookup(timespan_config.value,"timestamp_field",[])
+                  name = lookup(timestamp_field.value,"name",null)
+                }
+              }
+            }
            }
-           kind={
-          name=
+           dynamic"datastore_options"{
+           for_each = lookup(storage_config.value,"datastore_options",[])
+           content {
+             dynamic"partition_id"{
+            for_each = lookup(datastore_options.value,"partition_id",[])
+            content {
+             project_id = lookup(partition_id.value,"project_id",null)
+             namespace_id = lookup(partition_id.value,"namespace_id",null)
+            }
+             }
+             dynamic"kind"{
+               for_each = lookup(datastore_options.value,"kind",[])
+               content {
+                 name = lookup(kind.value,"name",null)
+                }
+              }
+            }
+           }
+           dynamic "cloud_storage_options"{
+           for_each = lookup(storage_config.value,"cloud_storage_options",[])
+           content {
+             dynamic "file_set"{
+               for_each = lookup(cloud_storage_options.value,"file_set",[])
+               content {
+                 url= lookup(file_set.value,"url",null)
+                 dynamic "regex_file_set"{
+                   for_each = lookup(cloud_storage_options.value,"regex_file_set",[])
+                   content {
+                     bucket_name = lookup(regex_file_set.value,"bucket_name",null)
+                     include_regex = lookup(regex_file_set.value,"include_regex",null)
+                     exclude_regex = lookup(regex_file_set.value,"exclude_regex",null)
+                    }
+                  }
+                }
+              }
+             bytes_limit_per_file = lookup(cloud_storage_options.value," bytes_limit_per_file",[])
+             bytes_limit_per_file_percent = lookup(cloud_storage_options.value,"bytes_limit_per_file_percent",[])
+             files_limit_percen = lookup(cloud_storage_options.value,"files_limit_percen",[])
+             file_types         = lookup(cloud_storage_options.value,"file_types",[])
+             sample_method      = lookup(cloud_storage_options.value,"sample_method",[])
+            }
+           }
+           dynamic"big_query_options"{
+           for_each = lookup(storage_config.value,"big_query_options",[])
+           content{
+             dynamic "table_reference"{
+             for_each = lookup(storage_config.value,"table_reference",[])
+             content{
+               project_id = lookup(table_reference.value,"project_id",null)
+               dataset_id = lookup(table_reference.value,"dataset_id",null)
+               table_id   = lookup(table_reference.value,"table_id",null)
+              }
+             }
+             rows_limit         = lookup(big_query_options.value,"rows_limit",null)
+             rows_limit_percent = lookup(big_query_options.value,"rows_limit_percent",null)
+             sample_method      = lookup(big_query_options.value,"sample_method ",null)
+             dynamic"identifying_fields"{
+             for_each = lookup(storage_config.value,"identifying_fields",[])
+             content{
+               name = lookup(identifying_fields.value,"name",null)
+              }
+             }
+             dynamic" included_fields"{
+             for_each = lookup(storage_config.value,"included_fields",[])
+             content{
+               name = lookup(included_fields.value,"name",null)
+              }
+             }
+             dynamic"excluded_fields"{
+             for_each = lookup(storage_config.value,"excluded_fields",[])
+             content{
+               name = lookup(excluded_fields.value,"name",null)
+              }
+             }
+            }
+           }
+           dynamic"hybrid_options"{
+           for_each = lookup(storage_config.value,"hybrid_options",[])
+           content {
+             description = lookup(hybrid_options.value,"description",null)
+             required_finding_label_keys = lookup(hybrid_options.value,"required_finding_label_keys",null)
+             labels =  lookup(hybrid_options.value,"labels",null)
+             dynamic "table_options"{
+              for_each = lookup(hybrid_options.value,"table_options",[])
+              content {
+               dynamic "identifying_fields"{
+                  for_each = lookup(table_options.value,"identifying_fields",[])
+                  content{
+                    name = lookup(identifying_fields.value,"name",[])
+                  }
+                }
+              }
+             }  
+            }
+           }
           }
-         }
-         cloud_storage_options={
-         file_set={
-          url=
-          regex_file_set={
-            bucket_name=
-            include_regex=
-            exclude_regex=
-          }
-          }
-          bytes_limit_per_file=
-          bytes_limit_per_file_percent=
-          files_limit_percent=
-          file_types=
-          sample_method=
-         }
-         big_query_options={
-         table_reference={
-          project_id=
-          dataset_id=
-          table_id =
-         }
-         rows_limit=
-         rows_limit_percent=
-         sample_method=
-         identifying_fields={
-           name=
-         }
-         included_fields={
-          name=
-         }
-         excluded_fields={
-          name=
-         }
-         }
-         hybrid_options={
-         description=
-         required_finding_label_keys=
-         table_options={
-          identifying_fields={
-            name=
-          }
-          }
-          labels=
-         }
         }
         dynamic"actions"{
-          save_findings={
-         output_config={
-          table ={
-            project_id=
-            dataset_id=
-            table_id=
+          for_each = lookup(inspect_job.value,"actions",[])
+          content {
+           dynamic"save_findings"{
+            for_each = lookup(actions.value,"save_findings",[])
+            content {
+             output_config{
+               for_each = var.output_config 
+               table {
+                 for_each = var.table[*]
+                 content{
+                   #project_id = lookup(table.value,"project_id",null)
+                   #dataset_id = lookup(table.value,"dataset_id",null)
+                   #table_id   = lookup(table.value,"table_id",null)
+                  }
+                }
+                 output_schema = var.output_schema[*]
+              }
+            }
+           }
+           dynamic "pub_sub"{
+            for_each = lookup(actions.value,"pub_sub",[])
+            content{
+              topic = var.pub_sub[*]
+            }
+           }
+           publish_summary_to_cscc = var.publish_summary_to_cscc[*]
+           publish_findings_to_cloud_data_catalog = var.publish_findings_to_cloud_data_catalog[*]
+           job_notification_emails = var.job_notification_emails[*]
+           dynamic"deidentify"{
+            for_each = lookup(actions.value,"deidentify",[])
+            content {
+              cloud_storage_output = var.cloud_storage_output[*]
+              file_types_to_transform = var.file_types_to_transform[*]
+              dynamic "transformation_config"{
+                for_each = lookup(deidentify.value,"transformation_config",[])
+                 content {
+                   deidentify_template = lookup(transformation_config.value,"deidentify_template",null)
+                   structured_deidentify_template = lookup(transformation_config.value,"structured_deidentify_template",null)
+                   image_redact_template = lookup(transformation_config.value,"image_redact_template",null)
+                  }
+              }
+              dynamic "transformation_details_storage_config"{
+                for_each = lookup(deidentify.value,"transformation_details_storage_config",[])
+                content {
+                  table {
+                    for_each = var.table[*]
+                    content{
+                     # table      = lookup(table.value,"table",null)
+                     #project_id = lookup(table.value,"project_id",null)
+                     table_id   = lookup(table.value,"table_id",null)
+                    }
+                  }
+                }
+              }
+            }
+           }
+           publish_to_stackdriver = var.publish_to_stackdriver[*]
           }
-          output_schema =
-          }
-         }
-         pub_sub={
-         topic=
-         }
-         publish_summary_to_cscc=
-          publish_findings_to_cloud_data_catalog=
-         job_notification_emails=
-          deidentify ={
-          cloud_storage_output=
-          file_types_to_transform=
-          transformation_config={
-          deidentify_template=
-          structured_deidentify_template=
-          image_redact_template=
-         }
-         transformation_details_storage_config={
-          table ={
-            table 
-            project_id 
-            table_id
-          }
-          }
-          }
-          publish_to_stackdriver=
         }
+      }
     }
 }
