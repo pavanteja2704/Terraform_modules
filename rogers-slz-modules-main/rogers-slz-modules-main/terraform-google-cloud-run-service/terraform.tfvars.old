@@ -1,0 +1,122 @@
+service_name                  = "cloud-run"
+location                      = "us-central1"
+traffic                       = [
+    {
+        percent               = 100
+        latest_revision       = true
+        revision_name         = "v1-0-0"
+        tag                   = null
+    }
+]
+template = [
+    /* {
+        metadata              = [
+            {
+                labels        = {}
+                annotations   = ""
+                name          = ""
+            }
+        ]
+    } */
+]
+containers                    = {
+    /* name                      = ""
+    args                      = ""
+    image                     = ""
+    command                   = "" */
+}
+env                           = [
+    /* {
+        name                  = ""
+        value                 = ""
+        value_from            = [
+            {
+                key           = ""
+                name          = ""
+            }
+        ]
+    } */
+]
+ports                         = [
+    {
+        name                  = ""
+        protocol              = ""
+        container_port        = ""
+    }
+]
+resources                     = [
+    {
+        limits                = ""
+        requests              = ""
+    }
+]
+volume_mounts                 = [
+    {
+        mount_path            = ""
+        name                  = ""
+    }
+]
+startup_probe                 = [
+    {
+        initial_delay_seconds = ""
+        timeout_seconds       = ""
+        period_seconds        = ""
+        failure_threshold     = ""
+        tcp_socket            = [
+            {
+                port          = ""
+            }
+        ]
+        http_get              = [
+            {
+                path          = ""
+                port          = ""
+                http_headers  = [
+                    {
+                        name  = ""
+                        value = ""
+                    }
+                ]
+            }
+        ]
+        grpc                  = [
+            {
+                port          = ""
+                service       = ""
+            }
+        ]
+    }
+]
+liveness_probe                = [
+    {
+        initial_delay_seconds = ""
+        timeout_seconds       = ""
+        period_seconds        = ""
+        failure_threshold     = ""
+        tcp_socket            = [
+            {
+                port          = ""
+            }
+        ]
+        http_get              = [
+            {
+                path          = ""
+                port          = ""
+                http_headers  = [
+                    {
+                        name  = ""
+                        value = ""
+                    }
+                ]
+            }
+        ]
+        grpc                  = [
+            {
+                port          = ""
+                service       = ""
+            }
+        ]
+    }
+]
+project_id                    = "peak-comfort-413811"
+autogenerate_revision_name    = true
